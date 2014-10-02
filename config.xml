@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.oneexpense587603" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>oneExpense</name>
+  <name>MeinWohnzimmer</name>
   <description>
-        A mobile web project for @oneresource_sap
+        Temperatursensor :-)
     </description>
   <author email="info@sandrodesign.ch" href="http://sandrodesign/">
       Sandro Scalco
@@ -18,36 +18,8 @@
   <preference name="Orientation" value="portrait" />
   <preference name="phonegap-version" value="3.5.0" />
 
-  <gap:plugin name="com.phonegap.plugins.barcodescanner" version="2.0.0" />
-
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
 
-<!-- Icons http://www.arenddeboer.com/cordova-phonegap-default-icon-generator --> 
-  <icon src=”www/img/cordova_128.png”/>
-  <icon src=”www/img/cordova_android_36.png” gap:platform=”android” gap:density=”ldpi”/>
-  <icon src=”www/img/cordova_android_48.png” gap:platform=”android” gap:density=”mdpi”/>
-  <icon src=”www/img/cordova_android_72.png” gap:platform=”android” gap:density=”hdpi”/>
-  <icon src=”www/img/cordova_android_96.png” gap:platform=”android” gap:density=”xhdpi”/>
-  <icon src=”www/img/cordova_bb_80.png” gap:platform=”blackberry”/>
-  <icon src=”www/img/cordova_bb_80.png” gap:platform=”blackberry” gap:state=”hover”/>
-  <icon src=”www/img/cordova_ios_57.png” gap:platform=”ios” width=”57″ height=”57″/>
-  <icon src=”www/img/cordova_ios_72.png” gap:platform=”ios” width=”72″ height=”72″/>
-  <icon src=”www/img/cordova_ios_114.png” gap:platform=”ios” width=”114″ height=”114″/>
-  <icon src=”www/img/cordova_ios_144.png” gap:platform=”ios” width=”144″ height=”144″/>
-  <icon src=”www/img/cordova_64.png” gap:platform=”webos”/>
-  <icon src=”www/img/cordova_48.png” gap:platform=”winphone”/>
-  <icon src=”www/img/cordova_173.png” gap:platform=”winphone” gap:role=”background”/>
-
-  <gap:splash src=”www/img/res/screen/android_ldpi_portrait.png.png” gap:platform=”android” gap:density=”ldpi”/>
-  <gap:splash src=”www/img/res/screen/android_mdpi_portrait.png” gap:platform=”android” gap:density=”mdpi”/>
-  <gap:splash src=”www/img/res/screen/android_hdpi_portrait.png” gap:platform=”android” gap:density=”hdpi”/>
-  <gap:splash src=”www/img/res/screen/android_xhdpi_portrait.png” gap:platform=”android” gap:density=”xhdpi”/>
-  <gap:splash src=”www/img/res/screen/blackberry_transparent_300.png” gap:platform=”blackberry”/>
-  <gap:splash src=”www/img/res/screen/iphone_portrait.png” gap:platform=”ios” width=”320″ height=”480″/>
-  <gap:splash src=”www/img/res/screen/iphone_retina_portrait.png” gap:platform=”ios” width=”640″ height=”960″/>
-  <gap:splash src=”www/img/res/screen/ipad_portrait.png” gap:platform=”ios” width=”768″ height=”1024″/>
-  <gap:splash src=”www/img/res/screen/ipad_landscape.png” gap:platform=”ios” width=”1024″ height=”768″/>
-  <gap:splash src=”www/img/res/screen/windows_phone_portrait.jpg” gap:platform=”winphone”/>
 </widget>
