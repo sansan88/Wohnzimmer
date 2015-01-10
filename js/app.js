@@ -48,8 +48,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     });
 
+    .state('tab.schweiz', {
+      url: '/schweiz',
+      views: {
+        'tab-schweiz': {
+          templateUrl: 'templates/tab-schweiz.html',
+          controller: 'SchweizCtrl'
+        }
+      }
+    });
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
 });
-

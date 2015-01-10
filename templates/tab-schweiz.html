@@ -1,0 +1,36 @@
+<ion-view title="Messwerte Schweiz">
+    <ion-content>
+      <h1>Browse</h1>
+      <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <ion-item ng-repeat="item in wetterdaten_schweiz">
+        Stadt:                    {{item.stn}}
+        Lufttemperatur °C:        {{item.tre200s0}}
+        Windrichtung °:           {{item.dkl010z0}}
+        Windgeschwindigkeit km/h  {{item.fu3010z0}}
+        Sonnenscheindauer min:    {{item.sre000z0}}
+        Niederschlag mm:          {{item.rre150z0}}
+
+        <!--
+        Parameter:
+        ----------
+        Einheit                  Beschreibung
+        tre200s0                 °C                       Lufttemperatur 2 m über Boden; Momentanwert
+        sre000z0                 min                      Sonnenscheindauer; Zehnminutensumme
+        rre150z0                 mm                       Niederschlag; Zehnminutensumme
+        dkl010z0                 °                        Windrichtung; Zehnminutenmittel
+        fu3010z0                 km/h                     Windgeschwindigkeit; Zehnminutenmittel
+        pp0qnhs0                 hPa                      Luftdruck reduziert auf Meeresniveau mit Standardatmosphäre (QNH); Momentanwert
+        fu3010z1                 km/h                     Böenspitze (Sekundenböe); Maximum
+        ure200s0                 %                        Relative Luftfeuchtigkeit 2 m über Boden; Momentanwert
+        prestas0                 hPa                      Luftdruck auf Stationshöhe (QFE); Momentanwert
+        pp0qffs0                 hPa                      Luftdruck reduziert auf Meeresniveau (QFF); Momentanwert
+      -->
+
+    </ion-item>
+  </ion-list>
+  </ion-content>
+</ion-view>
