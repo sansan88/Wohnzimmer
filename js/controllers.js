@@ -1,15 +1,16 @@
 angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope, $http) {
-
- $scope.doRefreshDash = function() {
+	$scope.conditions = "..updating..";
+  $scope.doRefreshDash = function() {
  	$http.get('http://sandroscalco.dyndns.org:3000').then(function(resp) {
     $scope.conditions = resp.data.temperatur;
 	  }, function(err) {
+			$scope.conditions = "-";
 	    //console.error('ERR', err);
 	    // err.status will contain the status code
-	  })
- 	}();
+	  }); // end get
+ 	};
 	$scope.doRefreshDash();
 })
 
@@ -29,7 +30,7 @@ angular.module('starter.controllers', [])
 			// Stop the ion-refresher from spinning
 			$scope.$broadcast('scroll.refreshComplete');
 		});
-	}();
+	};
 	$scope.doRefreshMesswerte();
 })
 
@@ -39,13 +40,11 @@ angular.module('starter.controllers', [])
 	$scope.doRefreshWebcam = function(){
 		$http.get('http://sandroscalco.dyndns.org:3000/camera').then(function(resp) {
 			$scope.webcam = resp.data;
-			//$scope.$broadcast('scroll.refreshComplete');
+			$scope.$broadcast('scroll.refreshComplete');
 		}, function(err) {
 			//console.error('ERR', err);
 			// err.status will contain the status code
 		});
-	}();
-
+	};
 	$scope.doRefreshWebcam();
-
 });
