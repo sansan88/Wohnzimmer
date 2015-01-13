@@ -72,4 +72,33 @@ angular.module('starter.controllers', [])
 		}
 	}
 
+})
+
+.controller('SettingsCtrl', function($scope, $http, $ionicLoading) {
+
+	$scope.account = {};
+	$scope.account.username = window.localStorage.getItem("username");
+	if ($scope.account.username === null){
+		$scope.account.username = "";
+	}
+
+	$scope.account.password = window.localStorage.getItem("password");
+	if ($scope.account.password === null){
+		$scope.account.password = "";
+	}
+
+	$scope.doLogin = function(){
+
+		if ($scope.account.username !== null){
+			window.localStorage.setItem("username", $scope.account.username);
+		}
+
+		if ($scope.account.password !== null){
+			window.localStorage.setItem("password", $scope.account.password);
+		}
+
+	}
+
+	$scope.doLogin();
+
 });
