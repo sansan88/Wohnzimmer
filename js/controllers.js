@@ -1,21 +1,17 @@
 angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope, $http) {
-	$http.get('http://sandroscalco.dyndns.org:3000').then(function(resp) {
-    $scope.conditions = resp.data.temperatur;
-	  }, function(err) {
-	    console.error('ERR', err);
-	    // err.status will contain the status code
-	  })
 
- $scope.refresh = function() {
+ $scope.doRefreshDash = function() {
  	$http.get('http://sandroscalco.dyndns.org:3000').then(function(resp) {
     $scope.conditions = resp.data.temperatur;
 	  }, function(err) {
 	    console.error('ERR', err);
 	    // err.status will contain the status code
 	  })
- };
+ }();
+$scope.doRefreshDash();
+
 })
 
 
@@ -23,17 +19,7 @@ angular.module('starter.controllers', [])
 	//init
 	$scope.wetterdaten = [];
 
-	$http.jsonp('http://sandroscalco.dyndns.org:3000/wetterdaten/ch/?callback=JSON_CALLBACK')
-	.success(function(data){
-		$scope.wetterdaten_schweiz = JSON.parse(JSON.parse(data));
-		console.log("gelesene Daten von server" + $scope.wetterdaten_schweiz.length);
-	})
-	.finally(function(){
-		//
-	});
-
-
-	$scope.doRefresh = function() {
+	$scope.doRefreshMesswerte = function() {
 		$http.jsonp('http://sandroscalco.dyndns.org:3000/wetterdaten/ch/?callback=JSON_CALLBACK')
 		.success(function(data){
 			$scope.wetterdaten_schweiz = JSON.parse(JSON.parse(data));
@@ -43,14 +29,16 @@ angular.module('starter.controllers', [])
 		.finally(function() {
 			// Stop the ion-refresher from spinning
 			$scope.$broadcast('scroll.refreshComplete');
-		});;
-	};
+		});
+	}();
+	$scope.doRefreshMesswerte();
+
 })
 
 
 .controller('WebcamCtrl', function($scope, $http) {
 
-	$scope.doRefresh = function(){
+	$scope.doRefreshWebcam = function(){
 		$http.get('http://sandroscalco.dyndns.org:3000/camera').then(function(resp) {
 			$scope.webcam = resp.data;
 		}, function(err) {
@@ -58,5 +46,8 @@ angular.module('starter.controllers', [])
 			// err.status will contain the status code
 		});
 	}();
+
+	$scope.doRefreshWebcam();
+
 
 ]);
