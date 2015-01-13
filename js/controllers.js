@@ -22,7 +22,7 @@ angular.module('starter.controllers', [])
 		$http.jsonp('http://sandroscalco.dyndns.org:3000/wetterdaten/ch/?callback=JSON_CALLBACK')
 		.success(function(data){
 			$scope.wetterdaten_schweiz = JSON.parse(JSON.parse(data));
-			console.log("gelesene Daten von server" + $scope.wetterdaten_schweiz.length);
+			console.log("gelesene Daten von server: " + $scope.wetterdaten_schweiz.length);
 
 		})
 		.finally(function() {
@@ -39,9 +39,9 @@ angular.module('starter.controllers', [])
 	$scope.doRefreshWebcam = function(){
 		$http.get('http://sandroscalco.dyndns.org:3000/camera').then(function(resp) {
 			$scope.webcam = resp.data;
-			$scope.$broadcast('scroll.refreshComplete');
+			//$scope.$broadcast('scroll.refreshComplete');
 		}, function(err) {
-			console.error('ERR', err);
+			//console.error('ERR', err);
 			// err.status will contain the status code
 		});
 	}();
