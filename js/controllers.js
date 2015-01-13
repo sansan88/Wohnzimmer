@@ -41,6 +41,7 @@ $scope.doRefreshDash();
 	$scope.doRefreshWebcam = function(){
 		$http.get('http://sandroscalco.dyndns.org:3000/camera').then(function(resp) {
 			$scope.webcam = resp.data;
+			$scope.$broadcast('scroll.refreshComplete');
 		}, function(err) {
 			console.error('ERR', err);
 			// err.status will contain the status code
@@ -49,5 +50,4 @@ $scope.doRefreshDash();
 
 	$scope.doRefreshWebcam();
 
-
-]);
+});
