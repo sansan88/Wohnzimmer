@@ -1,17 +1,17 @@
 <ion-view title="Einstellungen">
     <ion-content>
-    <form ng-controller="SettingsCtrl">
+    <form action="/login" method="post" ng-controller="SettingsCtrl">
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Username</span>
-          <input type="text" ng-model="account.username" ng-model-instant>
+          <input type="text" name="username" ng-model="account.username" ng-model-instant>
         </label>
         <label class="item item-input">
           <span class="input-label">Password</span>
-          <input type="password" ng-model="account.password" ng-model-instant>
+          <input type="password" name="password" ng-model="account.password" ng-model-instant>
         </label>
       </div>
-      <button class="button button-block button-positive" ng-click=doLogin()>
+      <button class="button button-block button-positive" type="submit" ng-click=doLogin()>
         Login & speichern
       </button>
     </form>
