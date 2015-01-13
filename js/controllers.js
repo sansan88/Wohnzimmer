@@ -41,7 +41,7 @@ angular.module('starter.controllers', [])
 		$http.jsonp('http://sandroscalco.dyndns.org:3000/camera/?callback=JSON_CALLBACK')
 		.success(function(data){
 			//var camobj = JSON.parse(data);
-			$scope.webcam = data.image;//camera;
+			$scope.webcam = "data:image/jpg;base64," + data.image;//camera;
 		})
 		.finally(function() {
 			// Stop the ion-refresher from spinning
