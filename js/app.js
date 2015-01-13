@@ -46,7 +46,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'DashCtrl'
         }
       }
-    });
+    })
 
     .state('tab.schweiz', {
       url: '/schweiz',

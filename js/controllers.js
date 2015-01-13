@@ -9,7 +9,7 @@ angular.module('starter.controllers', [])
 	  })
 
  $scope.refresh = function() {
- 	$http.get('http://sandroscalco.dyndns.org:3000/').then(function(resp) {
+ 	$http.get('http://sandroscalco.dyndns.org:3000').then(function(resp) {
     $scope.conditions = resp.data.temperatur;
 	  }, function(err) {
 	    console.error('ERR', err);
