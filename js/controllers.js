@@ -38,13 +38,19 @@ angular.module('starter.controllers', [])
 .controller('WebcamCtrl', function($scope, $http) {
 
 	$scope.doRefreshWebcam = function(){
-		$http.get('http://sandroscalco.dyndns.org:3000/camera').then(function(resp) {
-			$scope.webcam = resp.data;
-			$scope.$broadcast('scroll.refreshComplete');
-		}, function(err) {
-			//console.error('ERR', err);
-			// err.status will contain the status code
+		$http.jsonp('http://sandroscalco.dyndns.org:3000/camera/?callback=JSON_CALLBACK')
+		.success(function(data){
+			//var camobj = JSON.parse(data);
+			$scope.webcam = data.image;//camera;
+		})
+		.finally(function() {
+			// Stop the ion-refresher from spinning
+		//	$scope.$broadcast('scroll.refreshComplete');
 		});
 	};
-	$scope.doRefreshWebcam();
+
+	if ( $scope.webcam === undefined ){
+		$scope.doRefreshWebcam();
+	}
+
 });
