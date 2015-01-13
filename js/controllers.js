@@ -45,4 +45,18 @@ angular.module('starter.controllers', [])
 			$scope.$broadcast('scroll.refreshComplete');
 		});;
 	};
-});
+})
+
+
+.controller('WebcamCtrl', function($scope, $http) {
+
+	$scope.doRefresh = function(){
+		$http.get('http://sandroscalco.dyndns.org:3000/camera').then(function(resp) {
+			$scope.webcam = resp.data;
+		}, function(err) {
+			console.error('ERR', err);
+			// err.status will contain the status code
+		});
+	}();
+
+]);

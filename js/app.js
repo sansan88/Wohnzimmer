@@ -56,6 +56,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'SchweizCtrl'
         }
       }
+    })
+
+    .state('tab.webcam', {
+      url: '/webcam',
+      views: {
+        'tab-webcam': {
+          templateUrl: 'templates/tab-webcam.html',
+          controller: 'WebcamCtrl'
+        }
+      }
     });
 
   // if none of the above states are matched, use this as the fallback
