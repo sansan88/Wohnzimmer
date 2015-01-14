@@ -1,38 +1,48 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $http, $ionicLoading) {
-	$scope.conditions = "..updating..";
+.controller('DashCtrl', function($scope, $http, $ionicLoading, User) {
+	var user = User.getUser();
+	$scope.dash = "..updating..";
   $scope.doRefreshDash = function() {
 		$ionicLoading.show({
 			template: 'loading'
 		})
-	 	$http.get('http://sandroscalco.dyndns.org:3000').then(function(resp) {
-	    $scope.conditions = resp.data.temperatur;
-		  }, function(err) {
-				$scope.conditions = "-";
-				$ionicLoading.hide();
-		    //console.error('ERR', err);
-		    // err.status will contain the status code
-		  }); // end get
+
+		$http.jsonp('http://sandroscalco.dyndns.org:3000/wohnzimmer/temp/?callback=JSON_CALLBACK&access_token='  +user.password)
+		.success(function(data){
+			$scope.dash = data;
+			console.log("gelesene Daten von server: " + JSON.stringify($scope.dash));
+
+		})
+		.error(function(){
+			console.log("error");
+		})
+		.finally(function() {
+			// Stop the ion-refresher from spinning
+			$scope.$broadcast('scroll.refreshComplete');
 			$ionicLoading.hide();
+		});
  	};
 	$scope.doRefreshDash();
 })
 
 
-.controller('SchweizCtrl', function($scope, $http, $ionicLoading) {
-	//init
+.controller('SchweizCtrl', function($scope, $http, $ionicLoading, User) {
+	var user = User.getUser();
 	$scope.wetterdaten = [];
 
 	$scope.doRefreshMesswerte = function() {
 		$ionicLoading.show({
 			template: 'loading'
 		})
-		$http.jsonp('http://sandroscalco.dyndns.org:3000/wetterdaten/ch/?callback=JSON_CALLBACK')
+		$http.jsonp('http://sandroscalco.dyndns.org:3000/wetterdaten/ch/?callback=JSON_CALLBACK&access_token=' + user.password)
 		.success(function(data){
 			$scope.wetterdaten_schweiz = JSON.parse(JSON.parse(data));
 			console.log("gelesene Daten von server: " + $scope.wetterdaten_schweiz.length);
 
+		})
+		.error(function(){
+			console.log("error");
 		})
 		.finally(function() {
 			// Stop the ion-refresher from spinning
@@ -43,19 +53,22 @@ angular.module('starter.controllers', [])
 	$scope.doRefreshMesswerte();
 })
 
-.controller('WebcamCtrl', function($scope, $http, $ionicLoading) {
-
+.controller('WebcamCtrl', function($scope, $http, $ionicLoading, User) {
+	var user = User.getUser();
 
 	$scope.doRefreshWebcam = function(){
 
 		$ionicLoading.show({
 			template: 'loading'
 		})
-		$http.jsonp('http://sandroscalco.dyndns.org:3000/camera/?callback=JSON_CALLBACK')
+		$http.jsonp('http://sandroscalco.dyndns.org:3000/camera/?callback=JSON_CALLBACK&access_token=' + user.password)
 		.success(function(data){
 			//var camobj = JSON.parse(data);
 			$scope.webcam = "data:image/jpg;base64," + data.image;//camera;
 			window.localStorage.setItem("image", data.image);
+		})
+		.error(function(){
+			console.log("error");
 		})
 		.finally(function() {
 			$ionicLoading.hide();
@@ -74,31 +87,19 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('SettingsCtrl', function($scope, $http, $ionicLoading) {
+.controller('SettingsCtrl', function($scope, $http, $ionicLoading, User) {
 
-	$scope.account = {};
-	$scope.account.username = window.localStorage.getItem("username");
-	if ($scope.account.username === null){
-		$scope.account.username = "";
-	}
-
-	$scope.account.password = window.localStorage.getItem("password");
-	if ($scope.account.password === null){
-		$scope.account.password = "";
-	}
-
-	$scope.doLogin = function(){
-
-		if ($scope.account.username !== null){
-			window.localStorage.setItem("username", $scope.account.username);
+	$scope.user = User.getUser();
+	$scope.saveUser = function(){
+		if ($scope.user.username !== null){
+			window.localStorage.setItem("username", $scope.user.username); //sollte auch in store..
 		}
 
-		if ($scope.account.password !== null){
-			window.localStorage.setItem("password", $scope.account.password);
+		if ($scope.user.password !== null){
+			window.localStorage.setItem("password", $scope.user.password); //sollte auch in store..
 		}
-
 	}
 
-	$scope.doLogin();
+	$scope.saveUser();
 
 });
