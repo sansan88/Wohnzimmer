@@ -40,6 +40,9 @@ angular.module('starter.controllers', [])
 			$scope.wetterdaten_schweiz = JSON.parse(JSON.parse(data));
 			console.log("gelesene Daten von server: " + $scope.wetterdaten_schweiz.length);
 
+			$scope.datum = $scope.wetterdaten_schweiz[0].time.slice(0,8);
+			$scope.uhrzeit = $scope.wetterdaten_schweiz[0].time.slice(8,16);
+
 		})
 		.error(function(){
 			console.log("error");

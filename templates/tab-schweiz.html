@@ -1,4 +1,4 @@
-<ion-view title="Messwerte Schweiz">
+<ion-view title="Messwerte CH">
     <ion-content>
       <ion-refresher
         pulling-text="Pull to refresh..."
@@ -13,9 +13,14 @@
           Cancel
         </button>
       </div>
+      <div>
+        <p>Messdaten vom {{datum}} / {{uhrzeit}}</p>
+      </div>
+
       <ion-list>
         <ion-item ng-repeat="item in wetterdaten_schweiz">
           Stadt:                    {{item.stn}}
+
           Lufttemperatur °C:        {{item.tre200s0}}
           Windrichtung °:           {{item.dkl010z0}}
           Windgeschwindigkeit km/h  {{item.fu3010z0}}
