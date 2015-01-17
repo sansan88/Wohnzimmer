@@ -2,9 +2,56 @@
 
   <ion-content>
 
-    <div id="map">
+    <div class="list card">
+      <div class="item">
+        {{station.wetterdaten.tre200s0}}
+        <span class="item-note">°C / Lufttemperatur 2 m über Boden; Momentanwert</span>
+      </div>
+      <div class="item">
+        {{station.wetterdaten.sre000z0}}
+        <span class="item-note">min / Sonnenscheindauer; Zehnminutensumme</span>
+      </div>
+      <div class="item">
+        {{station.wetterdaten.rre150z0}}
+        <span class="item-note">mm / Niederschlag; Zehnminutensumme</span>
+      </div>
+      <div class="item">
+        {{station.wetterdaten.dkl010z0}}
+        <span class="item-note">° / Windrichtung; Zehnminutenmittel</span>
+      </div>
+      <div class="item">
+        {{station.wetterdaten.fu3010z0}}
+        <span class="item-note">km/h / Windgeschwindigkeit; Zehnminutenmittel</span>
+      </div>
+      <div class="item">
+        {{station.wetterdaten.pp0qnhs0}}
+        <span class="item-note">hPa  / Luftdruck reduziert auf Meeresniveau mit Standardatmosphäre (QNH); Momentanwert</span>
+      </div>
+      <div class="item">
+        {{station.wetterdaten.fu3010z1}}
+        <span class="item-note">km/h  / Böenspitze (Sekundenböe); Maximum</span>
+      </div>
+      <div class="item">
+        {{station.wetterdaten.ure200s0}}
+        <span class="item-note">%  / Relative Luftfeuchtigkeit 2 m über Boden; Momentanwert</span>
+      </div>
+      <div class="item">
+        {{station.wetterdaten.prestas0}}
+        <span class="item-note">hPa  / Luftdruck auf Stationshöhe (QFE); Momentanwert</span>
+      </div>
+      <div class="item">
+        {{station.wetterdaten.pp0qffs0}}
+        <span class="item-note">hPa  / Luftdruck reduziert auf Meeresniveau (QFF); Momentanwert</span>
+      </div>
 
+
+
+      <div class="item item-image" id="map"></div>
     </div>
+
+
+    pp0qffs0                 hPa
+
 
   </ion-content>
 </ion-view>

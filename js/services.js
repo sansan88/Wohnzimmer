@@ -17,6 +17,26 @@ angular.module('starter.services', [])
 
 })
 
+.factory('Wetterdaten', function($http){
+  var user = {
+    username: window.localStorage.getItem("username"),
+    password: window.localStorage.getItem("password")
+  };
+
+  var wetterdaten = [];
+
+  return {
+    getWetterdaten: function(){
+        return wetterdaten;
+    },
+    setWetterdaten: function(data){
+      wetterdaten = data;
+    }
+  }
+
+})
+
+
 .factory('Stationen', function(){
 
 var stationen =

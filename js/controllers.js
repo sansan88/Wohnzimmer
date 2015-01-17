@@ -27,11 +27,10 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('SchweizCtrl', function($scope, $http, $ionicLoading, User, Stationen) {
+.controller('SchweizCtrl', function($scope, $http, $ionicLoading, User, Stationen, Wetterdaten) {
 	var user = User.getUser();
 	var stationen = Stationen.getStationen();
 	$scope.wetterdaten = [];
-
 
 	$scope.doRefreshMesswerte = function() {
 		$ionicLoading.show({
@@ -40,6 +39,7 @@ angular.module('starter.controllers', [])
 		$http.jsonp('http://sandroscalco.dyndns.org:3000/wetterdaten/ch/?callback=JSON_CALLBACK&access_token=' + user.password)
 		.success(function(data){
 			$scope.wetterdaten_schweiz = JSON.parse(JSON.parse(data));
+			Wetterdaten.setWetterdaten($scope.wetterdaten_schweiz);
 
 			for (var i=0; i < $scope.wetterdaten_schweiz.length; i++){
 				for (var j=0; j < stationen.length; j++){
@@ -74,41 +74,54 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('StationenDetailCtrl', function($scope, $http, $ionicLoading, $stateParams, Stationen) {
+.controller('StationenDetailCtrl', function($scope, $http, $ionicLoading, $stateParams, Stationen, Wetterdaten) {
 	$scope.station = Stationen.getStation($stateParams.stn);
+	var wetterdaten = Wetterdaten.getWetterdaten();
+	try{
 
-	var output = document.getElementById("map");
+	for (var i=0; i < wetterdaten.length; i++){
+			if ( wetterdaten[i].stn === $scope.station.stn){
+				$scope.station.wetterdaten = wetterdaten[i];
+				break;
+			}
+		}
 
-	var lat1 = "";
-	var long1 = "";
-	var long = "";
-	var lat = "";
-	if ($scope.station.laenge_breite.charAt(2) === "°"){ // 	"10°17'/46°48'"
-		lat1  = $scope.station.laenge_breite.slice(7,9) + ".";
-		lat = 100/60*$scope.station.laenge_breite.slice(10,12)*100; //46..
-		long1 = $scope.station.laenge_breite.slice(0,2) + ".";
-		long = 100/60*$scope.station.laenge_breite.slice(3,5)*100; //46..; //10
-	}else{ // 	"8°17'/46°48'"
-		lat1  = $scope.station.laenge_breite.slice(6,8) + ".";
-		lat = 100/60*$scope.station.laenge_breite.slice(9,11)*100; //46.
-		long1 = $scope.station.laenge_breite.slice(0,1) + ".";
-		long = 100/60*$scope.station.laenge_breite.slice(2,4)*100; //8
+	}catch(e){
+
 	}
 
-	lat = lat.toString();
-	long = long.toString();
+		var output = document.getElementById("map");
 
-	var latitude = lat1 + lat.slice(0,4);
-	var longitude = long1 + long.slice(0,4);
+		var lat1 = "";
+		var long1 = "";
+		var long = "";
+		var lat = "";
+		if ($scope.station.laenge_breite.charAt(2) === "°"){ // 	"10°17'/46°48'"
+			lat1  = $scope.station.laenge_breite.slice(7,9) + ".";
+			lat = 100/60*$scope.station.laenge_breite.slice(10,12)*100; //46..
+			long1 = $scope.station.laenge_breite.slice(0,2) + ".";
+			long = 100/60*$scope.station.laenge_breite.slice(3,5)*100; //46..; //10
+		}else{ // 	"8°17'/46°48'"
+			lat1  = $scope.station.laenge_breite.slice(6,8) + ".";
+			lat = 100/60*$scope.station.laenge_breite.slice(9,11)*100; //46.
+			long1 = $scope.station.laenge_breite.slice(0,1) + ".";
+			long = 100/60*$scope.station.laenge_breite.slice(2,4)*100; //8
+		}
 
-	if (latitude === undefined){
-		output.innerHTML = 'Keine Positionsdaten erfasst.';
-	}else{
-		//output.innerHTML = '<p>Position ist ' + latitude + '° ' + longitude + '°</p>';
-		var img = new Image();
-		img.src = "http://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
-		output.appendChild(img);
-	}
+		lat = lat.toString();
+		long = long.toString();
+
+		var latitude = lat1 + lat.slice(0,4);
+		var longitude = long1 + long.slice(0,4);
+
+		if (latitude === undefined){
+			output.innerHTML = 'Keine Positionsdaten erfasst.';
+		}else{
+			//output.innerHTML = '<p>Position ist ' + latitude + '° ' + longitude + '°</p>';
+			var img = new Image();
+			img.src = "http://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+			output.appendChild(img);
+		}
 
 })
 
