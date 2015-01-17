@@ -58,6 +58,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
+    .state('tab.schweiz-detail', {
+      url: '/schweiz/:stn',
+      views: {
+        'tab-schweiz': {
+          templateUrl: 'templates/tab-station.html',
+          controller: 'StationenDetailCtrl'
+        }
+      }
+    })
+
     .state('tab.webcam', {
       url: '/webcam',
       views: {
