@@ -23,16 +23,20 @@ angular.module('starter.controllers', [])
 			$ionicLoading.hide();
 		});
  	};
-	$scope.doRefreshDash();
+
+
+	if ($scope.dash != true){
+		$scope.doRefreshDash();
+	}
+
 })
 
 
 .controller('SchweizCtrl', function($scope, $http, $ionicLoading, User, Stationen, Wetterdaten) {
 	var user = User.getUser();
 	var stationen = Stationen.getStationen();
-	$scope.wetterdaten = [];
 
-	$scope.doRefreshMesswerte = function() {
+		$scope.doRefreshMesswerte = function() {
 		$ionicLoading.show({
 			template: 'loading'
 		})
@@ -70,7 +74,13 @@ angular.module('starter.controllers', [])
 			$ionicLoading.hide();
 		});
 	};
-	$scope.doRefreshMesswerte();
+
+	if (Wetterdaten.getWetterdaten != true){
+
+		$scope.doRefreshMesswerte();
+
+	}
+
 })
 
 
