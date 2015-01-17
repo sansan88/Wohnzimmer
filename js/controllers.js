@@ -123,16 +123,18 @@ angular.module('starter.controllers', [])
 
 		var latitude = lat1 + lat.slice(0,4);
 		var longitude = long1 + long.slice(0,4);
+		latitude = Number(latitude);
+		longitude = Number(longitude);
 
-		if (latitude === undefined){
-			output.innerHTML = 'Keine Positionsdaten erfasst.';
-		}else{
-			//output.innerHTML = '<p>Position ist ' + latitude + '° ' + longitude + '°</p>';
-			var img = new Image();
-			img.src = "http://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
-			output.appendChild(img);
-		}
+		var map = L.map('osmap').setView([latitude, longitude], 13);
 
+		L.tileLayer('http://{s}.tiles.mapbox.com/v4/sansan.kpi09bof/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2Fuc2FuIiwiYSI6Ii13eXhkVzAifQ.0KEHIL-la2hIG7lRDsvHWw#4', {
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			maxZoom: 18
+		}).addTo(map);
+
+		var marker = L.marker([latitude, longitude]).addTo(map);
+		marker.bindPopup("<b>" + $scope.station.name + "</b>").bindPopup();
 })
 
 .controller('WebcamCtrl', function($scope, $http, $ionicLoading, User) {
