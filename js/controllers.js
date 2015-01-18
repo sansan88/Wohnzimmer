@@ -129,8 +129,9 @@ angular.module('starter.controllers', [])
 		var map = L.map('osmap').setView([latitude, longitude], 13);
 
 		L.tileLayer('http://{s}.tiles.mapbox.com/v4/sansan.kpi09bof/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2Fuc2FuIiwiYSI6Ii13eXhkVzAifQ.0KEHIL-la2hIG7lRDsvHWw#4', {
-			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-			maxZoom: 18
+		attribution: 'Current Location: ' + latitude + " & " + longitude,
+		//attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+		//	maxZoom: 18
 		}).addTo(map);
 
 		var marker = L.marker([latitude, longitude]).addTo(map);
